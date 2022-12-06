@@ -1,3 +1,3 @@
 export const englishTranslations = {
-    "onTour": "On Tour",
+    "onTour": "On Tour: {tourValue}",
 };

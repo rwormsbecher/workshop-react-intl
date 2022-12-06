@@ -1,10 +1,22 @@
-import React from "react";
+import React, { useState } from "react";
+import { FormattedMessage } from "react-intl";
 
 function App() {
+    const [isOnTour, setIsOnTour] = useState<boolean>(true);
+
     return (
         <main>
             <h1>The Offspring</h1>
-            <p>On tour: yes</p>
+            <p>
+                <FormattedMessage
+                    id="onTour"
+                    description="Notifies user whether band is on tour"
+                    defaultMessage="On Tour: {tourValue}"
+                    values={{
+                        tourValue: isOnTour ? "yes" : "no",
+                    }}
+                />
+            </p>
 
             <p>2022-2023 tour dates: 21 concerts</p>
             <p>Next concert near you: 5 months (Brussels)</p>
