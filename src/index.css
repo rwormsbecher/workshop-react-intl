@@ -21,3 +21,11 @@ button:hover {
     border: 2px solid #94018f;
     cursor: pointer;
 }
+
+.positive {
+    color: darkgreen;
+}
+
+.negative {
+    color: darkred;
+}

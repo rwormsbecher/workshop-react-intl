@@ -1,8 +1,16 @@
 import React, { useState } from "react";
-import { FormattedMessage } from "react-intl";
+import {
+    FormattedDate,
+    FormattedDateParts,
+    FormattedMessage,
+    FormattedNumber,
+    FormattedNumberParts,
+    FormattedRelativeTime,
+    FormattedTimeParts,
+} from "react-intl";
 
 function App() {
-    const [isOnTour, setIsOnTour] = useState<boolean>(true);
+    const [isOnTour] = useState<boolean>(true);
 
     return (
         <main>
@@ -11,18 +19,62 @@ function App() {
                 <FormattedMessage
                     id="onTour"
                     description="Notifies user whether band is on tour"
-                    defaultMessage="On Tour: {tourValue}"
+                    defaultMessage="On Tour: <tourValue></tourValue>"
                     values={{
-                        tourValue: isOnTour ? "yes" : "no",
+                        tourValue: () => (
+                            <>
+                                <i className="positive">
+                                    {isOnTour && <FormattedMessage id="general.yes" defaultMessage="Yes" />}
+                                </i>
+                                <i className="negative">
+                                    {!isOnTour && <FormattedMessage id="general.no" defaultMessage="no" />}
+                                </i>
+                            </>
+                        ),
                     }}
                 />
             </p>
 
             <p>2022-2023 tour dates: 21 concerts</p>
-            <p>Next concert near you: 5 months (Brussels)</p>
+            <p>
+                Next concert near you: <FormattedRelativeTime value={+5} unit="month" />
+                <br />
+                <br />
+                <FormattedTimeParts value={new Date("2023-05-13T17:00:00")}>
+                    {(parts) => (
+                        <>
+                            <b>{parts[0].value}</b>
+                            {parts[1].value}
+                            <small>{parts[2].value}</small>
+                        </>
+                    )}
+                </FormattedTimeParts>
+                <br />
+                <br />
+                &nbsp;(Brussels)
+            </p>
 
             <p>
-                1,071,250 fans get concert alerts for this artist. Join Songkick to track The Offspring and get concert
+                <FormattedNumberParts value={20000000}>
+                    {(parts) => (
+                        <>
+                            <b>{parts[0].value}</b>
+                            {parts[1].value}
+                            <small>{parts[2].value}</small>
+                            {parts[3].value}
+                            <sup>
+                                <small>{parts[4].value}</small>
+                            </sup>
+                        </>
+                    )}
+                </FormattedNumberParts>
+                <br />
+                <br />
+                <br />
+                <br />
+                <br />
+                <FormattedNumber value={1071250.0} />
+                &nbsp; fans get concert alerts for this artist. Join Songkick to track The Offspring and get concert
                 alerts when they play near you.
             </p>
 

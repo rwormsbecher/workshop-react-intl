@@ -13,7 +13,7 @@ const root = ReactDOM.createRoot(document.getElementById("root") as HTMLElement)
 root.render(
     <React.StrictMode>
         <IntlProvider
-            locale={navigator.language}
+            locale={"nl"}
             key={navigator.language}
             defaultLocale={navigator.language}
             messages={translationSets.en}
